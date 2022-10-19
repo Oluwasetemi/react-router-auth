@@ -7,12 +7,12 @@ import About from './About';
 export default function Home() {
   const navigate = useNavigate()
 
-  const handleSignIn = (event) => {
+  const handleSignIn = async (event) => {
     event.preventDefault()
     console.log('signing in')
-    signInWithRedirect(auth, provider)
+    await signInWithRedirect(auth, provider)
     // navigate to a route
-    navigate('/items')
+    // navigate('/items')
   }
 
   return (
