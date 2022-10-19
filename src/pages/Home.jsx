@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { auth, getRedirectResult, onAuthStateChanged, provider, signInWithRedirect } from '../config';
@@ -6,6 +6,8 @@ import { auth, getRedirectResult, onAuthStateChanged, provider, signInWithRedire
 import About from './About';
 
 export default function Home() {
+  // state
+  const [isAuth, setIsAuth] = useState(false)
   const navigate = useNavigate()
 
   const handleSignIn = async (event) => {
@@ -24,10 +26,9 @@ export default function Home() {
         const result = await getRedirectResult(auth)
 
         if (result) {
-          console.log(
-            'Signin Successful',
-            result.user
-          )
+          console.log('Signin Successful', result.user);
+          setIsAuth(true);
+          navigate('/items')
         }
 
       } catch (error) {
